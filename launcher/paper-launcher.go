@@ -165,6 +165,13 @@ func LinkFolder(appSource string, dataTarget string) {
 }
 
 func main() {
+	rawMemory := os.Getenv("MEMORY")
+	memory, error := strconv.ParseInt(rawMemory, 10, 64)
+	if error != nil {
+		memory = 2048
+	}
+	memoryString := strconv.Itoa(int(memory))
+
 	MakeFolder(appPath)
 	MakeFolder(dataPath)
 	latestBuild := fetchVersions()
@@ -201,7 +208,7 @@ func main() {
 	LinkFolder("logs", "logs")
 
 	fmt.Println("Starting Paper")
-	cmd := exec.Command("java", "-jar", paperPath)
+	cmd := exec.Command("java", "-Xmx"+memoryString+"M", "-Xms"+memoryString+"M", "-jar", paperPath)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
