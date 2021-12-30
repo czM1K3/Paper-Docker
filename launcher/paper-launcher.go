@@ -13,9 +13,9 @@ import (
 	"strconv"
 )
 
-const appPath string = "/root/minecraft-paper-docker/app/"
-const dataPath string = "/root/minecraft-paper-docker/data/"
-const defaultPath string = "/root/minecraft-paper-docker/src/"
+const appPath string = "/app/"
+const dataPath string = "/data/"
+const defaultPath string = "/default/"
 const paperPath string = appPath + "paper.jar"
 
 func fetchVersions() int {
@@ -150,12 +150,16 @@ func LinkFile(appSource string, dataTarget string) {
 	if !FileExists(dataPath + dataTarget) {
 		CopyFile(defaultPath+appSource, dataPath+dataTarget)
 		Link(dataPath+dataTarget, appPath+appSource)
+	} else if !FileExists(appPath + appSource) {
+		Link(dataPath+dataTarget, appPath+appSource)
 	}
 }
 
 func LinkFolder(appSource string, dataTarget string) {
 	if !FileExists(dataPath + dataTarget) {
 		MakeFolder(dataPath + dataTarget)
+		Link(dataPath+dataTarget, appPath+appSource)
+	} else if !FileExists(appPath + appSource) {
 		Link(dataPath+dataTarget, appPath+appSource)
 	}
 }

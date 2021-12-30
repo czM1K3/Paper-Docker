@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine AS build
+FROM golang:1.17-stretch AS build
 WORKDIR /app
 COPY launcher/ .
 RUN go build -o ./launcher ./paper-launcher.go
@@ -8,4 +8,4 @@ COPY src/ /default/
 WORKDIR /app
 COPY --from=build /app/launcher /app/launcher
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["./launcher"]
