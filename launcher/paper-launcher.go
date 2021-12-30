@@ -15,7 +15,8 @@ import (
 
 const appPath string = "/root/minecraft-paper-docker/app/"
 const dataPath string = "/root/minecraft-paper-docker/data/"
-const paperPath string = appPath + "/paper.jar"
+const defaultPath string = "/root/minecraft-paper-docker/src/"
+const paperPath string = appPath + "paper.jar"
 
 func fetchVersions() int {
 	response, err := http.Get("https://papermc.io/api/v2/projects/paper/versions/1.18")
@@ -140,16 +141,22 @@ func Link(source string, target string) {
 	cmd.Output()
 }
 
+func CopyFile(source string, target string) {
+	cmd := exec.Command("cp", source, target)
+	cmd.Output()
+}
+
 func LinkFile(appSource string, dataTarget string) {
 	if !FileExists(dataPath + dataTarget) {
-		Link(appPath+appSource, dataPath+dataTarget)
+		CopyFile(defaultPath+appSource, dataPath+dataTarget)
+		Link(dataPath+dataTarget, appPath+appSource)
 	}
 }
 
 func LinkFolder(appSource string, dataTarget string) {
 	if !FileExists(dataPath + dataTarget) {
-		MakeFolder(appPath + appSource)
-		Link(appPath+appSource, dataPath+dataTarget)
+		MakeFolder(dataPath + dataTarget)
+		Link(dataPath+dataTarget, appPath+appSource)
 	}
 }
 
