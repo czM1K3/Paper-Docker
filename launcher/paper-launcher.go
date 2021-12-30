@@ -184,6 +184,7 @@ func main() {
 	LinkFile("banned-players.json", "config/banned-players.json")
 	LinkFile("bukkit.yml", "config/bukkit.yml")
 	LinkFile("eula.txt", "config/eula.txt")
+	LinkFile("ops.json", "config/ops.json")
 	LinkFile("permissions.yml", "config/permissions.yml")
 	LinkFile("server.properties", "config/server.properties")
 	LinkFile("spigot.yml", "config/spigot.yml")
