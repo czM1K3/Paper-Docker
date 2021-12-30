@@ -9,10 +9,13 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"strconv"
 )
 
-const paperPath string = "./paper.jar"
+const appPath string = "/root/minecraft-paper-docker/app/"
+const dataPath string = "/root/minecraft-paper-docker/data/"
+const paperPath string = appPath + "/paper.jar"
 
 func fetchVersions() int {
 	response, err := http.Get("https://papermc.io/api/v2/projects/paper/versions/1.18")
@@ -127,7 +130,32 @@ func GetHash(path string) string {
 	return fmt.Sprintf("%x", h.Sum(nil))
 }
 
+func MakeFolder(path string) {
+	cmd := exec.Command("mkdir", "-p", path)
+	cmd.Output()
+}
+
+func Link(source string, target string) {
+	cmd := exec.Command("ln", "-s", source, target)
+	cmd.Output()
+}
+
+func LinkFile(appSource string, dataTarget string) {
+	if !FileExists(dataPath + dataTarget) {
+		Link(appPath+appSource, dataPath+dataTarget)
+	}
+}
+
+func LinkFolder(appSource string, dataTarget string) {
+	if !FileExists(dataPath + dataTarget) {
+		MakeFolder(appPath + appSource)
+		Link(appPath+appSource, dataPath+dataTarget)
+	}
+}
+
 func main() {
+	MakeFolder(appPath)
+	MakeFolder(dataPath)
 	latestBuild := fetchVersions()
 	url, hash := fetchBuild(latestBuild)
 	if FileExists(paperPath) {
@@ -141,4 +169,29 @@ func main() {
 	} else {
 		DownloadFile(paperPath, url)
 	}
+
+	MakeFolder(dataPath + "config/")
+	MakeFolder(dataPath + "save/")
+
+	LinkFile("banned-ips.json", "config/banned-ips.json")
+	LinkFile("banned-players.json", "config/banned-players.json")
+	LinkFile("bukkit.yml", "config/bukkit.yml")
+	LinkFile("eula.txt", "config/eula.txt")
+	LinkFile("permissions.yml", "config/permissions.yml")
+	LinkFile("server.properties", "config/server.properties")
+	LinkFile("spigot.yml", "config/spigot.yml")
+	LinkFile("whitelist.json", "config/whitelist.json")
+
+	LinkFolder("world", "save/world")
+	LinkFolder("world_nether", "save/world_nether")
+	LinkFolder("world_the_end", "save/world_the_end")
+	LinkFolder("plugins", "plugins")
+	LinkFolder("logs", "logs")
+
+	fmt.Println("Starting Paper")
+	cmd := exec.Command("java", "-jar", paperPath)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	_ = cmd.Run()
 }
