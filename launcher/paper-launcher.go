@@ -17,9 +17,10 @@ const appPath string = "/app/"
 const dataPath string = "/data/"
 const defaultPath string = "/default/"
 const paperPath string = appPath + "paper.jar"
+const mcVersion string = "1.18.1"
 
 func fetchVersions() int {
-	response, err := http.Get("https://papermc.io/api/v2/projects/paper/versions/1.18")
+	response, err := http.Get("https://papermc.io/api/v2/projects/paper/versions/" + mcVersion)
 
 	if err != nil {
 		fmt.Print(err.Error())
@@ -44,7 +45,7 @@ type Versions struct {
 }
 
 func fetchBuild(build int) (string, string) {
-	url := "https://papermc.io/api/v2/projects/paper/versions/1.18/builds/" + strconv.Itoa(build)
+	url := "https://papermc.io/api/v2/projects/paper/versions/" + mcVersion + "/builds/" + strconv.Itoa(build)
 	response, err := http.Get(url)
 
 	if err != nil {
