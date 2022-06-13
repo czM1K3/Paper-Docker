@@ -17,7 +17,7 @@ const appPath string = "/app/"
 const dataPath string = "/data/"
 const defaultPath string = "/default/"
 const paperPath string = appPath + "paper.jar"
-const mcVersion string = "1.18"
+const mcVersion string = "1.19"
 
 func fetchVersions() int {
 	response, err := http.Get("https://papermc.io/api/v2/projects/paper/versions/" + mcVersion)
@@ -195,6 +195,7 @@ func main() {
 	LinkFile("banned-ips.json", "config/banned-ips.json")
 	LinkFile("banned-players.json", "config/banned-players.json")
 	LinkFile("bukkit.yml", "config/bukkit.yml")
+	LinkFile("commands.yml", "config/commands.yml")
 	LinkFile("eula.txt", "config/eula.txt")
 	LinkFile("ops.json", "config/ops.json")
 	LinkFile("permissions.yml", "config/permissions.yml")
