@@ -26,3 +26,8 @@ Then you can attack to it with command:
 docker attack <container-id>
 ```
 When you want to leave, just press: CTRL+P than CTRL+Q
+
+# Build
+```bash
+docker buildx build --platform=linux/amd64,linux/arm64 --push --tag czm1k3/paper-docker .
+```
