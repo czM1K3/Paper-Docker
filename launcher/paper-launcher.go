@@ -209,6 +209,10 @@ func main() {
 	LinkFolder("plugins", "plugins")
 	LinkFolder("logs", "logs")
 
+	LinkFile("world/paper-world.yml", "save/world/paper-world.yml")
+	LinkFile("world_nether/paper-world.yml", "save/world_nether/paper-world.yml")
+	LinkFile("world_the_end/paper-world.yml", "save/world_the_end/paper-world.yml")
+
 	fmt.Println("Starting Paper")
 	cmd := exec.Command("java", "-Xmx"+memoryString+"M", "-Xms"+memoryString+"M", "-jar", paperPath)
 	cmd.Stdin = os.Stdin
