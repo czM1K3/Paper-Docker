@@ -8,12 +8,12 @@ When using, you agree with Mojang's [EULA](https://account.mojang.com/documents/
 ## Instalation
 Running in foreground
 ```bash
-docker run -v /your/data/path:/data -p 25565:25565 -e MEMORY=2048 --name my-paper-server --rm -ti czm1k3/paper-docker
+docker run -v /your/data/path:/data -p 25565:25565 -e MEMORY=2048 -e USER_ID=1000 -e GROUP_ID=1000 --name my-paper-server --rm -ti czm1k3/paper-docker
 ```
 
 Running in background
 ```bash
-docker run -v /your/data/path:/data -p 25565:25565 -e MEMORY=2048 --restart unless-stopped --name my-paper-server -tid czm1k3/paper-docker
+docker run -v /your/data/path:/data -p 25565:25565 -e MEMORY=2048 -e USER_ID=1000 -e GROUP_ID=1000 --restart unless-stopped --name my-paper-server -tid czm1k3/paper-docker
 ```
 
 ## Getting into prompt
