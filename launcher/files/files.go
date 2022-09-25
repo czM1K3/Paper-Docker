@@ -64,3 +64,17 @@ func LinkFolder(appSource string, dataTarget string) {
 		Link(config.DataPath+dataTarget, config.AppPath+appSource)
 	}
 }
+
+func Chmod() {
+	cmd1 := exec.Command("chown", "-R", "paper:minecraft", config.DataPath)
+	cmd1.Stdin = os.Stdin
+	cmd1.Stdout = os.Stdout
+	cmd1.Stderr = os.Stderr
+	cmd1.Run()
+
+	cmd2 := exec.Command("chown", "-R", "paper:minecraft", config.AppPath)
+	cmd2.Stdin = os.Stdin
+	cmd2.Stdout = os.Stdout
+	cmd2.Stderr = os.Stderr
+	cmd2.Run()
+}

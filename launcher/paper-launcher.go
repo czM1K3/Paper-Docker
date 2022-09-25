@@ -4,6 +4,7 @@ import (
 	"czm1k3/paper-launcher/config"
 	"czm1k3/paper-launcher/download"
 	"czm1k3/paper-launcher/files"
+	"czm1k3/paper-launcher/user"
 	"fmt"
 	"os"
 	"os/exec"
@@ -17,6 +18,8 @@ func main() {
 		memory = 2048
 	}
 	memoryString := strconv.Itoa(int(memory))
+
+	user.ValidateUser()
 
 	files.MakeFolder(config.AppPath)
 	files.MakeFolder(config.DataPath)
@@ -47,10 +50,12 @@ func main() {
 	files.LinkFile("world_nether/paper-world.yml", "save/world_nether/paper-world.yml")
 	files.LinkFile("world_the_end/paper-world.yml", "save/world_the_end/paper-world.yml")
 
+	files.Chmod()
+
 	fmt.Println("Starting Paper")
-	cmd := exec.Command("java", "-Xmx"+memoryString+"M", "-Xms"+memoryString+"M", "-jar", config.PaperPath)
+	cmd := exec.Command("runuser", "-u", "paper", "--", "java", "-Xmx"+memoryString+"M", "-Xms"+memoryString+"M", "-jar", config.PaperPath)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	_ = cmd.Run()
+	cmd.Run()
 }
