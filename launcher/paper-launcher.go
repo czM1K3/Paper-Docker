@@ -28,6 +28,7 @@ func main() {
 
 	files.MakeFolder(config.DataPath + "config/")
 	files.MakeFolder(config.DataPath + "save/")
+	files.MakeFolder(config.DataPath + "bluemap/")
 
 	files.LinkFile("banned-ips.json", "config/banned-ips.json")
 	files.LinkFile("banned-players.json", "config/banned-players.json")
