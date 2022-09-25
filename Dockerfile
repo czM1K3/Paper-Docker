@@ -1,4 +1,4 @@
-FROM golang:1.17-stretch AS build
+FROM golang:1.17-bullseye AS build
 WORKDIR /app
 COPY launcher/ .
 RUN go build -o ./launcher ./paper-launcher.go
