@@ -46,6 +46,7 @@ func main() {
 	files.LinkFolder("world_nether", "save/world_nether")
 	files.LinkFolder("world_the_end", "save/world_the_end")
 	files.LinkFolder("plugins", "plugins")
+	files.LinkFolder("bluemap", "bluemap")
 	files.LinkFolder("logs", "logs")
 
 	files.LinkFile("world/paper-world.yml", "save/world/paper-world.yml")
