@@ -49,8 +49,10 @@ func CopyFile(source string, target string) {
 
 func LinkFile(appSource string, dataTarget string) {
 	if !FileExists(config.DataPath + dataTarget) {
-		CopyFile(config.DefaultPath+appSource, config.DataPath+dataTarget)
-		Link(config.DataPath+dataTarget, config.AppPath+appSource)
+		if FileExists(config.DefaultPath + appSource) {
+			CopyFile(config.DefaultPath+appSource, config.DataPath+dataTarget)
+			Link(config.DataPath+dataTarget, config.AppPath+appSource)
+		}
 	} else if !FileExists(config.AppPath + appSource) {
 		Link(config.DataPath+dataTarget, config.AppPath+appSource)
 	}
