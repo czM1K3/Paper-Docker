@@ -39,6 +39,7 @@ func main() {
 	files.LinkFile("server.properties", "config/server.properties")
 	files.LinkFile("spigot.yml", "config/spigot.yml")
 	files.LinkFile("whitelist.json", "config/whitelist.json")
+	files.LinkFile("server-icon.png", "config/server-icon.png")
 
 	files.LinkFolder("world", "save/world")
 	files.LinkFolder("world_nether", "save/world_nether")

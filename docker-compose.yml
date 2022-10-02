@@ -8,5 +8,7 @@ services:
       - /home/gitpod/mc:/data
     environment:
       - MEMORY=2048
+      - USER_ID=33333
+      - GROUP_ID=33333
     tty: true
     stdin_open: true
