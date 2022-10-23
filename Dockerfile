@@ -14,4 +14,6 @@ COPY --from=build /app/launcher /app/launcher
 COPY --from=healthcheck /minecraft-healthcheck /app/healthcheck
 
 HEALTHCHECK --start-period=15s CMD /app/healthcheck
+VOLUME ["/data"]
+EXPOSE 25565/tcp
 ENTRYPOINT ["./launcher"]

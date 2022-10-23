@@ -54,6 +54,8 @@ func main() {
 	files.Chmod()
 
 	fmt.Println("Starting Paper")
+	fmt.Println()
+
 	cmd := exec.Command("runuser", "-u", "paper", "--", "java", "-Xmx"+memoryString+"M", "-Xms"+memoryString+"M", "-jar", config.PaperPath)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
