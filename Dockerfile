@@ -4,6 +4,7 @@ COPY launcher/ .
 RUN go build -o ./launcher ./paper-launcher.go
 
 FROM alpine AS healthcheck
+RUN apk add wget
 RUN wget -O minecraft-healthcheck.tar.gz "https://github.com/czM1K3/minecraft-healthcheck/releases/download/1.0.0/minecraft-healthcheck-1.0.0-linux-$([[ "$(uname -m)" = 'aarch64' ]] && echo 'arm64' || echo 'amd64').tar.gz"
 RUN tar -xzf minecraft-healthcheck.tar.gz
 
