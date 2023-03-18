@@ -31,7 +31,7 @@ func main() {
 	fmt.Println("Starting Paper")
 	fmt.Println()
 
-	cmd := exec.Command("runuser", "-u", "paper","--","bash", "-c"," cd " + config.DataPath+ " && java -Xmx"+memoryString+"M -Xms"+memoryString+"M -jar "+ config.PaperPath)
+	cmd := exec.Command("runuser", "-u", "paper","--","bash", "-c"," cd " + config.DataPath+ " && echo 'eula=true' > eula.txt && java -Xmx"+memoryString+"M -Xms"+memoryString+"M -jar "+ config.PaperPath)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
