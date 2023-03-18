@@ -31,7 +31,7 @@ func main() {
 	fmt.Println("Starting Paper")
 	fmt.Println()
 
-	cmd := exec.Command("runuser", "-u", "paper", "--", "cd", "/data", "&&", "java", "-Xmx"+memoryString+"M", "-Xms"+memoryString+"M", "-jar", config.PaperPath)
+	cmd := exec.Command("bash", "-c", "runuser -u paper -- cd " + config.DataPath+ " && java -Xmx"+memoryString+"M -Xms"+memoryString+"M -jar "+ config.PaperPath)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
