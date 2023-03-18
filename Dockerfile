@@ -1,7 +1,7 @@
 FROM golang:1.18-bullseye AS build
 WORKDIR /app
-COPY src/ .
-RUN go build -o ./launcher ./paper-launcher.go
+COPY . .
+RUN go build -o ./launcher .
 
 FROM alpine AS healthcheck
 RUN apk add wget
