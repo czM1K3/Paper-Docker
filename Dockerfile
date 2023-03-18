@@ -1,6 +1,6 @@
-FROM golang:1.17-bullseye AS build
+FROM golang:1.18-bullseye AS build
 WORKDIR /app
-COPY launcher/ .
+COPY src/ .
 RUN go build -o ./launcher ./paper-launcher.go
 
 FROM alpine AS healthcheck
@@ -9,7 +9,6 @@ RUN wget -O minecraft-healthcheck.tar.gz "https://github.com/czM1K3/minecraft-he
 RUN tar -xzf minecraft-healthcheck.tar.gz
 
 FROM openjdk:17-slim-bullseye as mc
-COPY src/ /default/
 WORKDIR /app
 COPY --from=build /app/launcher /app/launcher
 COPY --from=healthcheck /minecraft-healthcheck /app/healthcheck
