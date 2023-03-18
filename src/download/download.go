@@ -1,8 +1,6 @@
 package download
 
 import (
-	"czm1k3/paper-launcher/config"
-	"czm1k3/paper-launcher/files"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -11,6 +9,9 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/czM1K3/Paper-Docker/src/config"
+	"github.com/czM1K3/Paper-Docker/src/files"
 )
 
 func fetchVersions() int {

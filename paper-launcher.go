@@ -1,14 +1,15 @@
 package main
 
 import (
-	"czm1k3/paper-launcher/config"
-	"czm1k3/paper-launcher/download"
-	"czm1k3/paper-launcher/files"
-	"czm1k3/paper-launcher/user"
 	"fmt"
 	"os"
 	"os/exec"
 	"strconv"
+
+	"github.com/czM1K3/Paper-Docker/src/config"
+	"github.com/czM1K3/Paper-Docker/src/download"
+	"github.com/czM1K3/Paper-Docker/src/files"
+	"github.com/czM1K3/Paper-Docker/src/user"
 )
 
 func main() {

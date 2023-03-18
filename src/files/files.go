@@ -2,12 +2,13 @@ package files
 
 import (
 	"crypto/sha256"
-	"czm1k3/paper-launcher/config"
 	"fmt"
 	"io"
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/czM1K3/Paper-Docker/src/config"
 )
 
 func FileExists(name string) bool {
